@@ -26,7 +26,7 @@ nomBDD = 'sae24'   # Database name
 Broker MQTT :
 
 '''
-AddrMqtt = "192.168.159.33"   # Host address
+AddrMqtt = "192.168.113.33"   # Host address
 prtMqtt = 1883   # Port 
 tpcMqtt = 'topic_micro/#'   # Topic 
 '''
@@ -57,6 +57,7 @@ def convJSON(msg, obj):
 
     msg = str(msg.payload.decode("utf-8"))
     msgDICO = json.loads(msg)
+    print(msgDICO[obj])
     
     return msgDICO[obj]
 
@@ -104,10 +105,10 @@ def on_message(client, userdata, message):
         print("Ajouter à Micro 2: ", mAmp["Ampm2"])
         print("Ajouter à Micro 3: ", mAmp["Ampm3"])
 
-    if mAmp["Ampm1"] == True and mAmp["Ampm2"] == True and mAmp["Ampm3"] == True :      # If all 3 amplitutes are received :
+    #if mAmp["Ampm1"] == True and mAmp["Ampm2"] == True and mAmp["Ampm3"] == True :      # If all 3 amplitutes are received :
 
         print('\n Triangulation :\n')
-        envoi_coo(correspondance_coo_amp(mAmp))                                   # Sending data
+        envoi_coo(correspondance_coo_amp(mAmp))                                         # Sending data
      
 
 
@@ -171,6 +172,7 @@ def connexionBDD():
 # ==================== Execution ==================== #
 
 try:
+    print('debut')
     BDDSaE24 = connexionBDD()
     cursor = BDDSaE24.cursor()
 
